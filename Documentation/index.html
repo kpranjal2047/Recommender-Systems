@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to MovieLens Recommender’s documentation! &#8212; IR Assignment 3  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app">
+<span id="welcome-to-movielens-recommender-s-documentation"></span><h1>Welcome to MovieLens Recommender’s documentation!<a class="headerlink" href="#module-app" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-preprocessing.clean"></span><dl class="py class">
+<dt id="preprocessing.clean.CleanData">
+<em class="property">class </em><code class="sig-prename descclassname">preprocessing.clean.</code><code class="sig-name descname">CleanData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#preprocessing.clean.CleanData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper class to structure dataset. Save’s final matrix into a .npy file</p>
+<dl class="py method">
+<dt id="preprocessing.clean.CleanData.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">limit_users</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#preprocessing.clean.CleanData.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes output matrix and fills the matrix with ratings according to the dataset.</p>
+<p>Input:
+&#64;limit - number of entries in the dataset to be considered.</p>
+<p>Output:
+Dataframe and numpy array saved as ‘data_df.csv’ and ‘data_np.npy’ respectively.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="preprocessing.clean.CleanData.read_data">
+<code class="sig-name descname">read_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#preprocessing.clean.CleanData.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a pandas dataframe of the dataset with columns labelled as 0,1,2.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-error_measures.measures"></span><dl class="py function">
+<dt id="error_measures.measures.rmse">
+<code class="sig-prename descclassname">error_measures.measures.</code><code class="sig-name descname">rmse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">M_p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#error_measures.measures.rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes Root Mean Square Error.</p>
+<p>Input:
+&#64;M - Actual numpy array
+&#64;M_p - Predicted numpy array</p>
+<p>Returns: Root Mean square error - float</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="error_measures.measures.spearman_correlation">
+<code class="sig-prename descclassname">error_measures.measures.</code><code class="sig-name descname">spearman_correlation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">M_p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#error_measures.measures.spearman_correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Spearman score for the prediction.
+Formula: 1 - [sum(diff(predicted - actual)^2) / n((n^2)-1)]</p>
+<p>Input:
+&#64;M - Actual numpy array.
+&#64;M_p - Predicted numpy array.</p>
+<p>Returns:
+Spearman score - float</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="error_measures.measures.top_k">
+<code class="sig-prename descclassname">error_measures.measures.</code><code class="sig-name descname">top_k</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">M_p</span></em>, <em class="sig-param"><span class="n">ignore</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#error_measures.measures.top_k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns precision of predicted results in top k ratings.</p>
+<p>Input:
+&#64;M - Actual numpy array.
+&#64;M_p - Predicted numpy array.
+&#64;ignore - Ignores already rated values.</p>
+<p>Returns:
+Precision of predictions in top K - float</p>
+</dd></dl>
+
+<span class="target" id="module-svd.svd_algorithm"></span><span class="target" id="module-cur.cur_algorithm"></span><dl class="py function">
+<dt id="cur.cur_algorithm.column_selection">
+<code class="sig-prename descclassname">cur.cur_algorithm.</code><code class="sig-name descname">column_selection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">m_square_sum</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">repeat_allowed</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cur.cur_algorithm.column_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Column selection algorithm</p>
+<p>Input:
+&#64;M: Input numpy matrix M
+&#64;m_square_sum: Sum of squares of elements of M
+&#64;c: number of columns to select
+&#64;repeat: Repetition allowed</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="cur.cur_algorithm.cur">
+<code class="sig-prename descclassname">cur.cur_algorithm.</code><code class="sig-name descname">cur</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">dim_red</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">repeat</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cur.cur_algorithm.cur" title="Permalink to this definition">¶</a></dt>
+<dd><p>CUR function returns C,U,R</p>
+<p>Input:
+&#64;M: input numpy array
+&#64;c: Number of column selections
+&#64;r: Number of row selections
+&#64;repeat: Repetition allowed</p>
+</dd></dl>
+
+<span class="target" id="module-collaborative_filtering.collaborate"></span><dl class="py class">
+<dt id="collaborative_filtering.collaborate.Collaborate">
+<em class="property">class </em><code class="sig-prename descclassname">collaborative_filtering.collaborate.</code><code class="sig-name descname">Collaborate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em><span class="sig-paren">)</span><a class="headerlink" href="#collaborative_filtering.collaborate.Collaborate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to perform collaborative filtering with and without baseline approach</p>
+<dl class="py method">
+<dt id="collaborative_filtering.collaborate.Collaborate.estimate">
+<code class="sig-name descname">estimate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">item</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">baseline</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#collaborative_filtering.collaborate.Collaborate.estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate rating for a given input user and item.</p>
+<p>Input:
+user (int): Index of User
+item (int): Index of Item
+k (int): Nearest neighbours taken based on similarity (default = 2)
+baseline (bool): Toggle baseline offset (default = False)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="collaborative_filtering.collaborate.Collaborate.fill">
+<code class="sig-name descname">fill</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">baseline</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#collaborative_filtering.collaborate.Collaborate.fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills gaps in utility matrix using CF estimates</p>
+<p>Input:
+k (int): Nearest neighbours taken based on similarity (default = 2)
+baseline (bool): Toggle baseline offset (default = False)</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-collaborative_filtering.similarities"></span><dl class="py function">
+<dt id="collaborative_filtering.similarities.pearson_sim">
+<code class="sig-prename descclassname">collaborative_filtering.similarities.</code><code class="sig-name descname">pearson_sim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#collaborative_filtering.similarities.pearson_sim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pearson correlation coefficient of two rows M(x) and M(y)</p>
+<p>Input:
+M (numpy.ndarray): Input Matrix
+x (int): Index of first item
+y (int): Index of second item</p>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">IR Assignment 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Kumar Pranjal, Sukrit, Sri Satya Aditya, Mridul Kumar Rai.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
